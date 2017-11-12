@@ -21,7 +21,11 @@ class Organization(models.Model):
 
     # relations
     created_by = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL, related_name='organizations'
+        to=settings.AUTH_USER_MODEL, related_name='owned_organizations'
+    )
+    members = models.ManyToManyField(
+        to=settings.AUTH_USER_MODEL, related_name='organizations',
+        verbose_name=_('Members'), blank=True, null=True
     )
 
     def __str__(self):
